@@ -36,11 +36,11 @@ env/
 .ralphy/
 .gsd/
 
-# Local databases
-db.sqlite3
+# Local databases (Tracked for instant portfolio serverless DB bundle)
+# db.sqlite3
 
-# Media uploads (Can be re-seeded or hosted in cloud)
-/media/products/2026/05/24/
+# Media uploads (Tracked for portfolio catalog display)
+# /media/products/2026/05/24/
 
 # OS and system files
 .DS_Store
