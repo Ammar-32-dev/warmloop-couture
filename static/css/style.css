@@ -1,0 +1,347 @@
+/* ==========================================================================
+   Master UI Design System - "WARMLOOP COUTURE" Premium Luxury Theme
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Kumbh+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* LIGHT MODE - Warm Soft Premium Editorial */
+  --background: 33 40% 97%;         /* HSL: Warm Luxury Off-White Cream (#FAF8F5) */
+  --foreground: 0 0% 4%;            /* HSL: Matte Obsidian Black (#0A0A0A) */
+  --card: 0 0% 100%;                /* Pure White */
+  --card-foreground: 0 0% 4%;     
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 4%;
+  --primary: 0 0% 6%;               /* Matte Black primary buttons */
+  --primary-foreground: 33 40% 97%; /* Warm Off-White text on black button */
+  --secondary: 33 20% 92%;          /* Soft Sand Grey */
+  --secondary-foreground: 0 0% 6%;
+  --muted: 33 15% 94%;              /* Soft Grey Cream */
+  --muted-foreground: 0 0% 45%;     /* Mid Grey */
+  --accent: 33 40% 92%;             /* Elegant Warm Cream Accent (#F5ECE3) */
+  --accent-foreground: 0 0% 6%;
+  --destructive: 0 72.2% 50.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 33 10% 88%;             /* Thin Muted Sand border */
+  --input: 33 10% 90%;
+  --ring: 0 0% 6%;
+  --radius: 1.25rem;                 /* Organic Soft Rounded Corners */
+  
+  --ticker-bg: #F5ECE3;             /* Warm Cream ribbon in Light Mode */
+  --ticker-text: #0A0A0A;
+}
+
+.dark {
+  /* DARK MODE - Obsidian Shadows & Gold/Cream Highlights */
+  --background: 0 0% 4%;            /* Deep Black Obsidian (#0A0A0A) */
+  --foreground: 33 20% 96%;         /* Soft Cream White text */
+  --card: 0 0% 8%;                  /* Matte Charcoal Black (#141414) */
+  --card-foreground: 33 20% 96%;     
+  --popover: 0 0% 4%;
+  --popover-foreground: 33 20% 96%;
+  --primary: 33 40% 92%;            /* Warm Cream Accent (#F5ECE3) as prominent primary button */
+  --primary-foreground: 0 0% 4%;    /* Matte Black text on Cream button */
+  --secondary: 0 0% 14%;            /* Charcoal Grey */
+  --secondary-foreground: 33 20% 96%;
+  --muted: 0 0% 10%;
+  --muted-foreground: 0 0% 60%;     /* Clean Soft Grey */
+  --accent: 26 22% 78%;             /* Luxury Nude Beige Accent (#D4C5B9) */
+  --accent-foreground: 0 0% 4%;
+  --destructive: 0 72.2% 50.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14%;               /* Deep Charcoal borders */
+  --input: 0 0% 14%;
+  --ring: 33 40% 92%;
+  
+  --ticker-bg: #141414;             /* Obsidian Ribbon in Dark Mode */
+  --ticker-text: #F5ECE3;
+}
+
+/* ==========================================================================
+   Global Layout & Typography
+   ========================================================================== */
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Kumbh Sans', -apple-system, sans-serif;
+  letter-spacing: -0.015em;
+  line-height: 1.6;
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .display-font {
+  font-family: 'Krona One', sans-serif;
+  font-weight: 400;                 /* Krona One is designed for regular weight display */
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.mono-font {
+  font-family: 'Space Grotesk', monospace;
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   Design Atmosphere & Gradients
+   ========================================================================== */
+
+.radial-glow {
+  background: radial-gradient(circle 800px at 50% -250px, rgba(245, 236, 227, 0.25), transparent 75%);
+  transition: background 0.4s ease;
+}
+
+.dark .radial-glow {
+  background: radial-gradient(circle 900px at 50% -300px, rgba(245, 236, 227, 0.05), transparent 75%);
+}
+
+.bg-grid-pattern {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(212, 197, 185, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 197, 185, 0.12) 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(245, 236, 227, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 236, 227, 0.025) 1px, transparent 1px);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #0A0A0A 40%, #D4C5B9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .gradient-text {
+  background: linear-gradient(135deg, #FFFFFF 40%, #F5ECE3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-accent {
+  background: linear-gradient(135deg, #D4C5B9 0%, #F5ECE3 100%);
+}
+
+.dark .gradient-accent {
+  background: linear-gradient(135deg, #141414 0%, #D4C5B9 100%);
+}
+
+.gradient-card-mesh {
+  background: radial-gradient(circle at top right, rgba(245, 236, 227, 0.35), transparent 50%),
+              radial-gradient(circle at bottom left, rgba(250, 248, 245, 0.95), rgba(255, 255, 255, 1));
+}
+
+.dark .gradient-card-mesh {
+  background: radial-gradient(circle at top right, rgba(245, 236, 227, 0.05), transparent 50%),
+              radial-gradient(circle at bottom left, rgba(14, 14, 14, 0.8), rgba(8, 8, 8, 1));
+}
+
+/* ==========================================================================
+   Glassmorphism & Material Surfaces
+   ========================================================================== */
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(212, 197, 185, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.dark .glass-panel {
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid rgba(245, 236, 227, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 197, 185, 0.25);
+  box-shadow: 0 8px 32px rgba(212, 197, 185, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212, 197, 185, 0.6);
+  box-shadow: 0 16px 48px rgba(212, 197, 185, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.dark .glass-card {
+  background: rgba(20, 20, 20, 0.65);
+  border: 1px solid rgba(245, 236, 227, 0.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.dark .glass-card:hover {
+  border-color: rgba(245, 236, 227, 0.2);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* ==========================================================================
+   Interactive & Animation Soul
+   ========================================================================== */
+
+.hover-glow {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(245, 236, 227, 0.8);
+}
+
+.dark .hover-glow:hover {
+  box-shadow: 0 0 35px rgba(245, 236, 227, 0.15);
+}
+
+/* Tactile scale transitions */
+.active-scale {
+  transition: transform 0.2s ease;
+}
+.active-scale:active {
+  transform: scale(0.98) translateY(1px);
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 197, 185, 0.4);
+  border: 2px solid hsl(var(--background));
+  border-radius: 6px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(245, 236, 227, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 197, 185, 0.7);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 236, 227, 0.3);
+}
+
+/* ==========================================================================
+   Infinite Kinetic Text Runway Ticker
+   ========================================================================== */
+
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  background-color: var(--ticker-bg);
+  color: var(--ticker-text);
+  border-top: 1px solid rgba(212, 197, 185, 0.3);
+  border-bottom: 1px solid rgba(212, 197, 185, 0.3);
+  position: relative;
+  z-index: 10;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.dark .ticker-wrap {
+  border-top: 1px solid rgba(245, 236, 227, 0.08);
+  border-bottom: 1px solid rgba(245, 236, 227, 0.08);
+}
+
+.ticker {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker 25s linear infinite;
+  padding-left: 50%;
+}
+
+.ticker-item {
+  display: inline-block;
+  padding: 0 4rem;
+  font-family: 'Krona One', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+/* ==========================================================================
+   Global Luxury Form Styles (Django Form Styling Overrides)
+   ========================================================================== */
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form input[type="number"],
+form select,
+form textarea {
+  width: 100%;
+  background-color: rgb(244, 244, 245); /* bg-zinc-100/50 light */
+  border: 1px solid rgb(228, 228, 231); /* border-zinc-200 */
+  border-radius: 0.75rem; /* rounded-xl */
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem; /* text-sm */
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: rgb(9, 9, 11); /* text-zinc-950 */
+  font-family: 'Space Grotesk', monospace;
+  outline: none;
+}
+
+.dark form input[type="text"],
+.dark form input[type="password"],
+.dark form input[type="email"],
+.dark form input[type="number"],
+.dark form select,
+.dark form textarea {
+  background-color: rgb(9, 9, 11); /* bg-zinc-950 dark */
+  border-color: rgb(39, 39, 42); /* border-zinc-800 */
+  color: rgb(255, 255, 255); /* text-white */
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form input[type="email"]:focus,
+form input[type="number"]:focus,
+form select:focus,
+form textarea:focus {
+  border-color: rgb(9, 9, 11); /* focus-zinc-950 light */
+  box-shadow: 0 0 0 1px rgba(9, 9, 11, 0.05);
+}
+
+.dark form input[type="text"]:focus,
+.dark form input[type="password"]:focus,
+.dark form input[type="email"]:focus,
+.dark form input[type="number"]:focus,
+.dark form select:focus,
+.dark form textarea:focus {
+  border-color: rgb(245, 236, 227); /* focus-[#F5ECE3] dark */
+  box-shadow: 0 0 0 1px rgba(245, 236, 227, 0.15);
+}
+
+/* Custom error message styling for native django form fields */
+.form-field-errors {
+  color: rgb(239, 68, 68); /* text-red-500 */
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.75rem;
+  margin-top: 0.35rem;
+}

@@ -1,0 +1,73 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}Sign Up // WARMLOOP COUTURE{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto my-8 md:my-16">
+    <!-- Glassmorphic Premium Form Card -->
+    <div class="glass-card rounded-3xl p-8 border border-zinc-200/80 dark:border-zinc-850 shadow-2xl relative">
+        
+        <!-- Mesh atmospheric background glow inside the card -->
+        <div class="absolute -right-10 -top-10 w-48 h-48 rounded-full bg-[#F5ECE3]/20 dark:bg-[#F5ECE3]/5 blur-[60px] pointer-events-none"></div>
+
+        <!-- Header -->
+        <div class="text-center mb-8 relative z-10">
+            <span class="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-zinc-400 dark:text-[#FBFF00]">Atelier Access</span>
+            <h2 class="text-3xl font-normal tracking-tight text-zinc-900 dark:text-white display-font uppercase mt-1">Sign Up</h2>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 font-light mt-1.5 leading-relaxed font-sans max-w-xs mx-auto">
+                Create an account to save custom sizes, track runway drops, and access personalized tailored checkout features.
+            </p>
+        </div>
+
+        <!-- Standard Django Auth Registration Form -->
+        <form method="post" class="space-y-5 relative z-10">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="space-y-1.5">
+                    <label for="{{ field.id_for_label }}" class="block text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                        {{ field.label }}
+                    </label>
+                    <div class="relative">
+                        {{ field }}
+                    </div>
+                    {% if field.help_text %}
+                        <p class="text-[10px] text-zinc-400 dark:text-zinc-500 font-sans font-light leading-relaxed mt-1">
+                            {{ field.help_text|safe }}
+                        </p>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p class="text-xs text-red-500 font-mono mt-1 pl-1">
+                            ★ {{ error }}
+                        </p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+                <div class="p-4 bg-red-50 dark:bg-red-950/20 rounded-xl border border-red-100 dark:border-red-900/30 text-xs text-red-500 font-mono space-y-1">
+                    {% for error in form.non_field_errors %}
+                        <p>★ {{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Register Button -->
+            <button type="submit" class="w-full inline-flex items-center justify-center rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 bg-primary hover:bg-zinc-800 dark:hover:bg-white text-primary-foreground dark:text-primary-foreground h-12 hover-glow shadow-md hover:shadow-lg active:scale-98 mt-6">
+                Register Membership
+            </button>
+        </form>
+
+        <!-- Cohesive Navigation Footer -->
+        <div class="text-center mt-6 pt-6 border-t border-zinc-150 dark:border-zinc-800/60 relative z-10">
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 font-light font-sans">
+                Already have a boutique profile? 
+                <a href="{% url 'myapp:login' %}" class="text-zinc-900 dark:text-[#F5ECE3] font-bold font-mono tracking-wide underline ml-1 hover:text-zinc-650 dark:hover:text-primary transition-colors duration-200">
+                    Log In
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

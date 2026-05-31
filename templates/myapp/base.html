@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}WARMLOOP // COUTURE{% endblock %}</title>
+    <meta name="description" content="{% block description %}Eradicate the generic. Discover custom Indian couture and premium tactical streetwear by WARMLOOP // COUTURE.{% endblock %}">
+    
+    <!-- 1. Inline Blocking Script - Prevents styling flash glitch on initial loads -->
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Kumbh+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              fontFamily: {
+                sans: ['"Kumbh Sans"', 'sans-serif'],
+                display: ['"Krona One"', 'sans-serif'],
+                mono: ['"Space Grotesk"', 'monospace'],
+              },
+              colors: {
+                border: 'hsl(var(--border))',
+                input: 'hsl(var(--input))',
+                ring: 'hsl(var(--ring))',
+                background: 'hsl(var(--background))',
+                foreground: 'hsl(var(--foreground))',
+                primary: {
+                  DEFAULT: 'hsl(var(--primary))',
+                  foreground: 'hsl(var(--primary-foreground))'
+                },
+                secondary: {
+                  DEFAULT: 'hsl(var(--secondary))',
+                  foreground: 'hsl(var(--secondary-foreground))'
+                },
+                destructive: {
+                  DEFAULT: 'hsl(var(--destructive))',
+                  foreground: 'hsl(var(--destructive-foreground))'
+                },
+                muted: {
+                  DEFAULT: 'hsl(var(--muted))',
+                  foreground: 'hsl(var(--muted-foreground))'
+                },
+                accent: {
+                  DEFAULT: 'hsl(var(--accent))',
+                  foreground: 'hsl(var(--accent-foreground))'
+                },
+                popover: {
+                  DEFAULT: 'hsl(var(--popover))',
+                  foreground: 'hsl(var(--popover-foreground))'
+                },
+                card: {
+                  DEFAULT: 'hsl(var(--card))',
+                  foreground: 'hsl(var(--card-foreground))'
+                },
+              },
+              borderRadius: {
+                lg: `var(--radius)`,
+                md: `calc(var(--radius) - 2px)`,
+                sm: 'calc(var(--radius) - 4px)'
+              },
+            }
+          }
+        }
+      </script>
+</head>
+<body class="antialiased bg-background text-foreground bg-grid-pattern relative min-h-screen selection:bg-[#F5ECE3] selection:text-black duration-300 transition-colors">
+    <!-- Soft vibrant top gradient atmospheric mesh -->
+    <div class="radial-glow absolute inset-0 z-0 pointer-events-none"></div>
+    <div class="relative z-10">
+        {% include 'myapp/header.html' %}
+    
+    <!-- Spacing Correction: pt-28 ensures no overlap on load with the floating sticky header -->
+    <main class="container mx-auto px-4 pt-28 pb-12">
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    {% include 'myapp/footer.html' %}
+
+    <!-- Bespoke Atelier Consultation Modal Overlay -->
+    <div id="bespoke-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300" onclick="if (event.target === this) closeBespokeModal();">
+        <div class="bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800/80 rounded-3xl shadow-2xl w-full max-w-lg p-8 relative transform scale-95 transition-all duration-300" onclick="event.stopPropagation();">
+            <!-- Close Button -->
+            <button onclick="closeBespokeModal()" class="absolute top-6 right-6 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-200 focus:outline-none" title="Close Consultation Modal">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="mb-6">
+                <span class="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-zinc-500 dark:text-[#FBFF00]">WARMLOOP // ATELIER</span>
+                <h3 class="text-3xl font-normal tracking-tight text-zinc-900 dark:text-white display-font uppercase mt-1">Bespoke Curation</h3>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 font-light mt-1.5 font-sans leading-relaxed">
+                    Request an exclusive personal consultation with our master couturier to customize premium sizes, heritage fabrics, or secure bespoke architectural alterations.
+                </p>
+            </div>
+
+            <!-- Consultation Form -->
+            <form id="bespoke-consultation-form" onsubmit="submitBespokeForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Full Name</label>
+                    <input type="text" id="bespoke-name" required class="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-850 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-700 transition-colors duration-200 text-zinc-900 dark:text-white font-mono" placeholder="ALEX MERCER">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Email Address</label>
+                    <input type="email" id="bespoke-email" required class="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-850 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-700 transition-colors duration-200 text-zinc-900 dark:text-white font-mono" placeholder="ALEX@WARMLOOP.COUTURE">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Consultation Discipline</label>
+                    <div class="relative">
+                        <select id="bespoke-discipline" class="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-850 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-700 transition-colors duration-200 text-zinc-900 dark:text-white font-mono appearance-none cursor-pointer">
+                            <option value="ethnic">Heritage Handwoven Banarasi Silk & Chikankari</option>
+                            <option value="streetwear">Avant-Garde Oversized & Techwear Customization</option>
+                            <option value="tailoring">Private Tailored Contemporary Suitings</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-zinc-400">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Inquiry & Custom Measurements</label>
+                    <textarea id="bespoke-details" required rows="3" class="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-850 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-700 transition-colors duration-200 text-zinc-900 dark:text-white font-sans font-light leading-relaxed" placeholder="Please describe your style vision, fabric preferences, or specific measurements..."></textarea>
+                </div>
+                <button type="submit" class="w-full inline-flex items-center justify-center rounded-xl text-xs font-mono font-bold tracking-wider uppercase bg-primary hover:bg-zinc-800 dark:hover:bg-white text-primary-foreground dark:text-primary-foreground h-12 hover-glow shadow-md hover:shadow-lg transition-all duration-300">
+                    Request Atelier Curation
+                </button>
+            </form>
+
+            <!-- Success Message Card -->
+            <div id="bespoke-success-message" class="hidden text-center py-6 space-y-4">
+                <div class="h-12 w-12 rounded-full bg-zinc-100 dark:bg-primary/10 text-zinc-950 dark:text-primary flex items-center justify-center mx-auto">
+                    <svg class="h-6 w-6 text-zinc-800 dark:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div class="space-y-2">
+                    <h4 class="text-xl font-bold tracking-tight text-zinc-900 dark:text-white display-font uppercase">Request Received</h4>
+                    <p class="text-sm text-zinc-505 dark:text-zinc-400 font-light max-w-sm mx-auto leading-relaxed">
+                        Thank you, <span id="success-client-name" class="font-bold text-zinc-950 dark:text-white font-mono"></span>. Your atelier file has been transferred. Our head couturier will contact you at <span id="success-client-email" class="font-bold text-zinc-950 dark:text-white font-mono"></span> within 24 hours.
+                    </p>
+                </div>
+                <button onclick="closeBespokeModal()" class="inline-flex items-center justify-center rounded-xl text-xs font-mono font-bold tracking-wider uppercase bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-800 dark:text-white px-6 py-3 transition-colors duration-250">
+                    Return to Runway
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        function submitBespokeForm(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('bespoke-name');
+            const emailInput = document.getElementById('bespoke-email');
+            const form = document.getElementById('bespoke-consultation-form');
+            const successCard = document.getElementById('bespoke-success-message');
+            const successName = document.getElementById('success-client-name');
+            const successEmail = document.getElementById('success-client-email');
+            
+            if (nameInput && emailInput && form && successCard) {
+                // Inject client details dynamically
+                successName.textContent = nameInput.value;
+                successEmail.textContent = emailInput.value;
+                
+                // Transition form out and success panel in
+                form.classList.add('hidden');
+                successCard.classList.remove('hidden');
+            }
+        }
+        
+        // Setup global escape key handler for safety
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeBespokeModal();
+            }
+        });
+    </script>
+    </div>
+</body>
+</html>

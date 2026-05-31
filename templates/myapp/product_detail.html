@@ -1,0 +1,107 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}WARMLOOP // {{ product.title }}{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <!-- Back Navigation -->
+    <div class="mb-8">
+        <a href="{% url 'myapp:product_list' %}" class="inline-flex items-center space-x-2 text-sm font-bold text-zinc-500 hover:text-[#D4C5B9] dark:text-zinc-400 dark:hover:text-[#F5ECE3] transition-colors duration-300">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span>Back to Runway</span>
+        </a>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+        <!-- Left: Product Image / Catalog Photo Container -->
+        <div class="lg:col-start-1">
+            <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-150 dark:bg-zinc-950 p-4 shadow-lg dark:shadow-2xl glass-panel relative flex items-center justify-center min-h-[350px] sm:min-h-[450px]">
+                <div class="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-[#F5ECE3]/15 dark:bg-[#F5ECE3]/5 blur-[80px] pointer-events-none"></div>
+                <div class="absolute -left-12 -bottom-12 w-48 h-48 rounded-full bg-zinc-350/5 dark:bg-[#FAF8F5]/10 blur-[80px] pointer-events-none"></div>
+                
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.title }}" class="h-full w-full object-cover object-center rounded-xl shadow-md relative z-10">
+                {% else %}
+                    <!-- Premium abstract mesh gradient placeholder backup -->
+                    <div class="h-full w-full min-h-[330px] sm:min-h-[430px] gradient-card-mesh flex flex-col items-center justify-center p-8 relative rounded-xl border border-zinc-200/80 dark:border-zinc-800/60 shadow-inner">
+                        <div class="absolute inset-0 bg-zinc-900/5 dark:bg-[#F5ECE3]/5 backdrop-blur-[1px] rounded-xl"></div>
+                        <span class="text-xs uppercase tracking-widest text-zinc-500 dark:text-accent font-mono font-bold mb-2 z-10">Couture Garment</span>
+                        <span class="text-2xl font-bold text-zinc-900 dark:text-white z-10 text-center tracking-tight display-font max-w-xs px-6">{{ product.title }}</span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Right: Product Specifications & Purchase -->
+        <div class="mt-10 lg:col-start-2 lg:mt-0 space-y-8">
+            <!-- Header Metadata -->
+            <div class="space-y-4">
+                <span class="text-xs font-mono font-bold tracking-widest text-zinc-850 dark:text-accent uppercase inline-flex bg-[#F5ECE3] border border-[#D4C5B9]/60 dark:bg-accent/10 dark:border-accent/30 px-4 py-1.5 rounded-full">
+                    {{ product.category.name }}
+                </span>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight display-font text-zinc-900 dark:text-white leading-none">
+                    {{ product.title }}
+                </h1>
+                <div class="flex items-center space-x-4 pt-2">
+                    <span class="text-3xl font-bold font-mono text-zinc-900 dark:text-white tracking-tight">₹{{ product.price }}</span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-xl text-xs font-mono bg-zinc-100 dark:bg-zinc-900/60 text-zinc-500 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800/60">
+                        In Stock: {{ product.stock }} units
+                    </span>
+                </div>
+            </div>
+
+            <!-- Description Card -->
+            <div class="glass-card rounded-2xl p-6 space-y-4 border border-zinc-200/80 dark:border-zinc-800/60 shadow-sm dark:shadow-md">
+                <h3 class="text-xs font-normal tracking-widest text-zinc-900 dark:text-white uppercase display-font">Garment Narrative</h3>
+                <p class="text-sm md:text-base text-zinc-650 dark:text-zinc-350 font-light leading-relaxed">
+                    {{ product.description }}
+                </p>
+            </div>
+
+            <!-- Custom Premium Apparel Specs Table -->
+            <div class="glass-card rounded-2xl p-6 space-y-4 border border-zinc-200/80 dark:border-zinc-800/60 shadow-sm dark:shadow-md">
+                <h3 class="text-xs font-normal tracking-widest text-zinc-900 dark:text-accent uppercase display-font">Bespoke Specifications</h3>
+                <div class="grid grid-cols-2 gap-4 text-xs font-medium text-zinc-650 dark:text-zinc-350 font-sans border-t border-zinc-200/80 dark:border-zinc-800/40 pt-4">
+                    <div class="space-y-1">
+                        <span class="text-[10px] text-zinc-400 dark:text-zinc-500 uppercase tracking-wider block font-mono">Fabric Type</span>
+                        <span class="text-zinc-800 dark:text-white font-semibold">{% if product.category.name == "Ethnic Wear" %}Boutique Silk & Georgette{% elif product.category.name == "Modern Streetwear" %}400 GSM French Terry{% else %}100% Organic Supima Cotton{% endif %}</span>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] text-zinc-400 dark:text-zinc-500 uppercase tracking-wider block font-mono">Garment Fit</span>
+                        <span class="text-zinc-800 dark:text-white font-semibold">{% if product.category.name == "Ethnic Wear" %}Traditional Crafted{% elif product.category.name == "Modern Streetwear" %}Avant-Garde Oversized{% else %}Sleek Tailored Silhouette{% endif %}</span>
+                    </div>
+                    <div class="space-y-1 mt-2">
+                        <span class="text-[10px] text-zinc-400 dark:text-zinc-500 uppercase tracking-wider block font-mono">Care Directives</span>
+                        <span class="text-zinc-800 dark:text-white font-semibold">{% if product.category.name == "Ethnic Wear" %}Dry Clean Only{% else %}Machine Wash Cold / Air Dry{% endif %}</span>
+                    </div>
+                    <div class="space-y-1 mt-2">
+                        <span class="text-[10px] text-zinc-400 dark:text-zinc-500 uppercase tracking-wider block font-mono">Couture Style</span>
+                        <span class="text-zinc-800 dark:text-white font-semibold">Bespoke Runway Edition</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purchase Area -->
+            <div class="space-y-4 pt-4 border-t border-zinc-200/80 dark:border-zinc-800/40">
+                <!-- Add to Cart (WebMCP Annotated Form) -->
+                <form action="{% url 'cart:add_to_cart' product.id %}" method="post" class="w-full relative z-20"
+                      toolname="addToCartFromDetail_{{ product.id }}"
+                      tooldescription="Add this specific product ({{ product.title }}) to the shopping cart"
+                      toolautosubmit="true">
+                    {% csrf_token %}
+                    <button type="submit" class="w-full sm:w-80 inline-flex items-center justify-center rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 bg-primary hover:bg-zinc-800 dark:hover:bg-white text-primary-foreground dark:text-primary-foreground hover-glow h-12 px-8 shadow-md dark:shadow-2xl dark:shadow-[0_4px_14px_rgba(245,236,227,0.12)] dark:hover:shadow-[0_4px_20px_rgba(245,236,227,0.2)] active:scale-95">
+                        Add to Cart
+                    </button>
+                </form>
+                <p class="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 leading-normal">
+                    * Agentic automation tools can execute transactions directly using the `addToCartFromDetail_{{ product.id }}` WebMCP API declaration.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
