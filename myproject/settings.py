@@ -25,8 +25,8 @@ SECRET_KEY = 'your-super-secret-key-change-this-in-production'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # Temporarily set to True for development to serve static files
 
-# For development, allow localhost
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# For development, allow localhost, localtunnel, and PythonAnywhere
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.pythonanywhere.com', '.loca.lt']
 
 # Security settings for HTTPS (uncomment when using HTTPS)
 # SECURE_SSL_REDIRECT = True
